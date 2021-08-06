@@ -1,2 +1,0 @@
-# reminder
-Reminder mobile-app
