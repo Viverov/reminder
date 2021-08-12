@@ -5,6 +5,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "bundle-android": "mkdir -p ./android/app/src/main/assets/ && react-native bundle --platform android --dev false --entry-file App.tsx --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res/",
     "eject": "expo eject",
     "test": "jest --watchAll"
   },
