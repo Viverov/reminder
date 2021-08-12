@@ -1,23 +1,22 @@
 import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import useCachedResources from './utils/useCachedResources';
+import { MainScreen } from "./components/MainScreen";
+import Storage from "./utils/Storage";
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
+  const isCacheLoaded = useCachedResources();
 
-  if (!isLoadingComplete) {
+  const storage = new Storage()
+  const isStorageLoaded = storage.loadStorage()
+
+  if (!isCacheLoaded || !isStorageLoaded) {
     return null;
   } else {
     return (
       <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
+        <MainScreen storage={storage}/>
       </SafeAreaProvider>
     );
   }
