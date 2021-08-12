@@ -14,7 +14,8 @@ npm run web
 
 Debug apk
 ```bash
-npm run bundle-android
-cd .android
-
+npm install
+npm run eject-android
+cd android
+./gradlew assembleRelease
 ```
