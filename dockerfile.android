@@ -1,0 +1,19 @@
+FROM thyrlian/android-sdk:7.0
+
+# Install apt dependencies
+RUN apt-get update
+RUN apt install npm -y
+RUN npm install -g n
+RUN n 14
+
+# Set workdir
+COPY ./ /app/
+WORKDIR /app
+
+# Bootstrap & Eject
+RUN npm install -g expo-cli
+CMD npm install && \
+    npm run eject-android && \
+    cd android && \
+    /bin/sh ./gradlew assembleRelease && \
+    cp /app/android/app/build/outputs/apk/release/app-release.apk /app/android/reminder.apk
