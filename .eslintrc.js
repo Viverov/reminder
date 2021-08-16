@@ -96,7 +96,7 @@ module.exports = {
         },
         {
           selector: 'enumMember',
-          format: ['UPPER_CASE', 'PascalCase'],
+          format: ['PascalCase'],
         },
       ],
       '@typescript-eslint/explicit-function-return-type': ['error', {

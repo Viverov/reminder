@@ -37,27 +37,27 @@ export default class MainScreen extends Component<MainScreenProps, MainScreenSta
 
   private resolveScreen(): JSX.Element {
     switch (this.state.currentStatus) {
-      case Status.AT_HOME: {
-        return <AtHomeScreen startPrepareCallback={() => { this.changeCurrentStatus(Status.PREPARE_TO_GO); }} />;
+      case Status.AtHome: {
+        return <AtHomeScreen startPrepareCallback={() => { this.changeCurrentStatus(Status.PrepareToGo); }} />;
       }
-      case Status.PREPARE_TO_GO: {
+      case Status.PrepareToGo: {
         return (
           <PrepareToGoScreen
-            confirmTasksCallback={() => this.changeCurrentStatus(Status.READY_TO_GO)}
+            confirmTasksCallback={() => this.changeCurrentStatus(Status.ReadyToGo)}
             storage={this.props.storage}
           />
         );
       }
-      case Status.READY_TO_GO: {
+      case Status.ReadyToGo: {
         return (
           <ReadyToGoScreen
             storage={this.props.storage}
-            onAtHomeCallback={() => { this.changeCurrentStatus(Status.AT_HOME); }}
+            onAtHomeCallback={() => { this.changeCurrentStatus(Status.AtHome); }}
           />
         );
       }
-      case Status.ALARM: {
-        return <AlarmScreen onDismissCallback={() => this.changeCurrentStatus(Status.PREPARE_TO_GO)} />;
+      case Status.Alarm: {
+        return <AlarmScreen onDismissCallback={() => this.changeCurrentStatus(Status.PrepareToGo)} />;
       }
       default: return (
         <Text>
@@ -74,18 +74,18 @@ export default class MainScreen extends Component<MainScreenProps, MainScreenSta
 
   private resolveStatus(): Status {
     const exitFromHomeDate = this.props.storage.getExitFromHomeDate();
-    if (exitFromHomeDate === null) return Status.AT_HOME;
+    if (exitFromHomeDate === null) return Status.AtHome;
     if (new Date().getTime() - exitFromHomeDate.getTime() < config.defaultMsForWalk) {
-      return Status.READY_TO_GO;
+      return Status.ReadyToGo;
     }
 
-    return Status.AT_HOME;
+    return Status.AtHome;
   }
 }
 
 enum Status {
-  AT_HOME,
-  PREPARE_TO_GO,
-  READY_TO_GO,
-  ALARM,
+  AtHome,
+  PrepareToGo,
+  ReadyToGo,
+  Alarm,
 }

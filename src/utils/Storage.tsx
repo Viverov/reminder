@@ -5,12 +5,12 @@ export default class Storage {
   private exitFromHomeDate: Date | null = null;
 
   public async loadStorage(): Promise<boolean> {
-    const tasksItem = await AsyncStorage.getItem(StorageKeys.TASKS);
+    const tasksItem = await AsyncStorage.getItem(StorageKeys.Tasks);
     if (tasksItem != null) {
       this.tasks = JSON.parse(tasksItem);
     }
 
-    const exitFromHomeDate = await AsyncStorage.getItem(StorageKeys.EXIT_FROM_HOME_DATE);
+    const exitFromHomeDate = await AsyncStorage.getItem(StorageKeys.ExitFromHomeDate);
     if (exitFromHomeDate !== null) {
       this.exitFromHomeDate = new Date(exitFromHomeDate);
     }
@@ -24,7 +24,7 @@ export default class Storage {
 
   public async setTasks(tasks: string[]): Promise<void> {
     this.tasks = tasks;
-    await AsyncStorage.setItem(StorageKeys.TASKS, JSON.stringify(tasks));
+    await AsyncStorage.setItem(StorageKeys.Tasks, JSON.stringify(tasks));
   }
 
   public getExitFromHomeDate(): Date | null {
@@ -36,15 +36,15 @@ export default class Storage {
       throw new Error('Invalid date');
     }
     this.exitFromHomeDate = date;
-    await AsyncStorage.setItem(StorageKeys.EXIT_FROM_HOME_DATE, date.toString());
+    await AsyncStorage.setItem(StorageKeys.ExitFromHomeDate, date.toString());
   }
 
   public async clearExitFromHomeDate(): Promise<void> {
-    await AsyncStorage.removeItem(StorageKeys.EXIT_FROM_HOME_DATE);
+    await AsyncStorage.removeItem(StorageKeys.ExitFromHomeDate);
   }
 }
 
 enum StorageKeys {
-  TASKS = 'TASKS',
-  EXIT_FROM_HOME_DATE = 'EXIT_FROM_HOME_DATE',
+  Tasks = 'Tasks',
+  ExitFromHomeDate = 'ExitFromHomeDate',
 }
