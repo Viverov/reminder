@@ -40,7 +40,7 @@ export default class Storage {
   }
 
   public async clearExitFromHomeDate(): Promise<void> {
-    await AsyncStorage.removeItem(StorageKeys.ExitFromHomeDate);
+    await AsyncStorage.removeItem(StorageKeys.ExitFromHomeDate)
   }
 }
 
