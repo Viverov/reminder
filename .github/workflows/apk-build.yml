@@ -16,6 +16,10 @@ on:
       build-description:
         description: 'Build info'
         required: false
+  workflow_run:
+    workflows: [ "app-check" ]
+    types:
+      - completed
 
 jobs:
   build:
