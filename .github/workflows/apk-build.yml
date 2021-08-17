@@ -35,7 +35,7 @@ jobs:
             ./android/reminder.apk-${{ steps.date.outputs.date }}
           retention-days: 30
       - name: Delete old apk's
-        uses: viverov/purge-artifacts-action@v1
+        uses: viverov/purge-artifacts-action@v1.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pattern: 'reminder.apk-.+$'
