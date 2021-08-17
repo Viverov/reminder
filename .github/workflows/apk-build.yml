@@ -1,25 +1,21 @@
 name: apk-build
 
 on:
-#  push:
-#    branches:
-#      - 'main'
-#      - 'develop'
-#      - 'release/*'
-#  pull_request:
-#    branches:
-#      - 'main'
-#      - 'develop'
-#      - 'release/*'
-#  workflow_dispatch:
-#    inputs:
-#      build-description:
-#        description: 'Build info'
-#        required: false
-  workflow_run:
-    workflows: [ "app-check" ]
-    types:
-      - completed
+  push:
+    branches:
+      - 'main'
+      - 'develop'
+      - 'release/*'
+  pull_request:
+    branches:
+      - 'main'
+      - 'develop'
+      - 'release/*'
+  workflow_dispatch:
+    inputs:
+      build-description:
+        description: 'Build info'
+        required: false
 
 jobs:
   build-apk:
