@@ -73,3 +73,10 @@ buck-out/
 web-build/
 
 # @end expo-cli
+
+# IDE
+## IntelliJ project files
+*.iml
+*.iws
+*.ipr
+.idea/
