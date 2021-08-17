@@ -1,0 +1,41 @@
+name: apk-build
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'develop'
+      - 'release/*'
+  pull_request:
+    branches:
+      - 'main'
+      - 'develop'
+      - 'release/*'
+  workflow_dispatch:
+    inputs:
+      build-description:
+        description: 'Build info'
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Build
+        run: docker-compose --file docker-compose.android.yml up
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: reminder.apk
+          path: |
+            ./android/reminder.apk-${{ steps.date.outputs.date }}
+          retention-days: 30
+      - name: Delete old apk's
+        uses: viverov/purge-artifacts-action@v1.1.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pattern: 'reminder.apk-.+$'
