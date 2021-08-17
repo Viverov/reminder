@@ -30,9 +30,9 @@ jobs:
       - name: Archive build artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: reminder.apk
+          name: reminder.apk-${{ steps.date.outputs.date }}
           path: |
-            ./android/reminder.apk-${{ steps.date.outputs.date }}
+            ./android/reminder.apk
           retention-days: 30
       - name: Delete old apk's
         uses: viverov/purge-artifacts-action@v1.1.0
